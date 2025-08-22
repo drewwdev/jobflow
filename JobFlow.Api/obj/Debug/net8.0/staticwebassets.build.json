@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "EAIahzlo7ZcA2EDSXGAh31mzJdgTBJ4G3g7se+rkO+Y=",
+  "Source": "JobFlow.Api",
+  "BasePath": "_content/JobFlow.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
