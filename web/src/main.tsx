@@ -6,6 +6,7 @@ import "./index.css";
 import Root from "./routes/Root";
 import CompaniesPage from "./routes/CompaniesPage";
 import ApplicationsPage from "./routes/ApplicationsPage";
+import ApplicationCreatePage from "./routes/ApplicationCreatePage";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       { path: "/", element: <div style={{ padding: 16 }}>Home — JobFlow</div> },
       { path: "/companies", element: <CompaniesPage /> },
       { path: "/applications", element: <ApplicationsPage /> },
+      { path: "/applications/new", element: <ApplicationCreatePage /> },
     ],
   },
 ]);

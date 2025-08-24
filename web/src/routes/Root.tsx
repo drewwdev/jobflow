@@ -22,6 +22,9 @@ export default function Root() {
         <Link to="/applications" style={active("/applications")}>
           Applications
         </Link>
+        <Link to="/applications/new" style={active("/applications/new")}>
+          New Application
+        </Link>
       </nav>
       <Outlet />
     </div>
