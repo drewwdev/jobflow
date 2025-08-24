@@ -19,6 +19,9 @@ export default function Root() {
         <Link to="/companies" style={active("/companies")}>
           Companies
         </Link>
+        <Link to="/applications" style={active("/applications")}>
+          Applications
+        </Link>
       </nav>
       <Outlet />
     </div>

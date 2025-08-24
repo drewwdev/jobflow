@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Root from "./routes/Root";
 import CompaniesPage from "./routes/CompaniesPage";
+import ApplicationsPage from "./routes/ApplicationsPage";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <div style={{ padding: 16 }}>Home — JobFlow</div> },
       { path: "/companies", element: <CompaniesPage /> },
+      { path: "/applications", element: <ApplicationsPage /> },
     ],
   },
 ]);
