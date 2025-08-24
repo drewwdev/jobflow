@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JobFlow.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+502de21dc6ae2befe968009dadfb2d1dd5866655")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2790e4d4ebf3d610e1633b5e757ec3df62eea7d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("JobFlow.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JobFlow.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
