@@ -9,6 +9,7 @@ import ApplicationsPage from "./routes/ApplicationsPage";
 import ApplicationCreatePage from "./routes/ApplicationCreatePage";
 import RegisterPage from "./routes/RegisterPage";
 import LoginPage from "./routes/LoginPage";
+import ApplicationDetailPage from "./routes/ApplicationDetailPage";
 import AuthProvider from "./auth/AuthProvider";
 import RequireAuth from "./auth/RequireAuth";
 
@@ -55,7 +56,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/applications/:id",
-        element: <RequireAuth>{/* <ApplicationDetailPage /> */}</RequireAuth>,
+        element: (
+          <RequireAuth>
+            <ApplicationDetailPage />
+          </RequireAuth>
+        ),
       },
     ],
   },

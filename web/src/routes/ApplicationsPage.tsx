@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api, toQuery } from "../lib/api";
+import { Link } from "react-router-dom";
 
 type AppStatus = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -119,7 +120,9 @@ export default function ApplicationsPage() {
                   flexWrap: "wrap",
                 }}>
                 <div>
-                  <div style={{ fontWeight: 600 }}>{a.title}</div>
+                  <div style={{ fontWeight: 600 }}>
+                    <Link to={`/applications/${a.id}`}>{a.title}</Link>
+                  </div>
                   <div style={{ fontSize: 12, color: "#666" }}>
                     {a.companyName ? a.companyName : "—"} •{" "}
                     {a.location || "Remote/—"}
