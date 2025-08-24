@@ -9,6 +9,8 @@ public class AppDbContext : DbContext
 
     public DbSet<Company> Companies { get; set; } = null!;
     public DbSet<Application> Applications { get; set; } = null!;
+    public DbSet<Activity> Activities { get; set; } = null!;
+
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
