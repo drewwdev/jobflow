@@ -10,6 +10,10 @@ public class Activity
     public Guid ApplicationId { get; set; }
     public Application Application { get; set; } = null!;
 
+    [Required]
+    public Guid UserId { get; set; }
+
+
     [Required, MaxLength(50)]
     public string Type { get; set; } = "Note";
 

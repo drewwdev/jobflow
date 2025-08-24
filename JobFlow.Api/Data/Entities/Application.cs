@@ -6,6 +6,10 @@ public class Application
 {
     public Guid Id { get; set; } = Guid.NewGuid();
 
+    [Required]
+    public Guid UserId { get; set; }
+
+
     [Required, MaxLength(200)]
     public string Title { get; set; } = string.Empty;
 

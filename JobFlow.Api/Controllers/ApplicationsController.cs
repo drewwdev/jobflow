@@ -1,6 +1,8 @@
 using JobFlow.Api.Data;
 using JobFlow.Api.Data.Entities;
 using JobFlow.Api.DTOs;
+using JobFlow.Api.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +10,7 @@ namespace JobFlow.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ApplicationsController : ControllerBase
 {
     private readonly AppDbContext _db;
@@ -20,11 +23,18 @@ public class ApplicationsController : ControllerBase
         [FromQuery] Guid? companyId,
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20)
+        
     {
+        var userId = User.GetUserId();
+        if (userId is null) return Unauthorized();
+
+        var query = _db.Applications.AsNoTracking()
+            .Include(a => a.Company)
+            .Where(a => a.UserId == userId);
+
+
         if (page < 1) page = 1;
         if (pageSize is < 1 or > 100) pageSize = 20;
-
-        var query = _db.Applications.AsNoTracking().Include(a => a.Company).AsQueryable();
 
         if (status.HasValue) query = query.Where(a => a.Status == status.Value);
         if (companyId.HasValue) query = query.Where(a => a.CompanyId == companyId.Value);
@@ -56,7 +66,13 @@ public class ApplicationsController : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<ApplicationReadDto>> Get(Guid id)
     {
-        var a = await _db.Applications.AsNoTracking().Include(x => x.Company).FirstOrDefaultAsync(x => x.Id == id);
+        var userId = User.GetUserId();
+        if (userId is null) return Unauthorized();
+
+        var a = await _db.Applications.AsNoTracking()
+            .Include(x => x.Company)
+            .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId); // 👈
+
         if (a is null) return NotFound();
 
         return Ok(new ApplicationReadDto(
@@ -71,8 +87,12 @@ public class ApplicationsController : ControllerBase
     {
         if (!ModelState.IsValid) return ValidationProblem(ModelState);
 
+        var userId = User.GetUserId();
+        if (userId is null) return Unauthorized();
+
         var entity = new Application
         {
+            UserId = userId.Value,
             Title = dto.Title.Trim(),
             SourceUrl = string.IsNullOrWhiteSpace(dto.SourceUrl) ? null : dto.SourceUrl!.Trim(),
             Location = string.IsNullOrWhiteSpace(dto.Location) ? null : dto.Location!.Trim(),
@@ -100,7 +120,10 @@ public class ApplicationsController : ControllerBase
     {
         if (!ModelState.IsValid) return ValidationProblem(ModelState);
 
-        var entity = await _db.Applications.FirstOrDefaultAsync(x => x.Id == id);
+        var userId = User.GetUserId();
+        if (userId is null) return Unauthorized();
+
+        var entity = await _db.Applications.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         if (entity is null) return NotFound();
 
         entity.Title = dto.Title.Trim();
@@ -129,8 +152,12 @@ public class ApplicationsController : ControllerBase
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var entity = await _db.Applications.FirstOrDefaultAsync(x => x.Id == id);
+        var userId = User.GetUserId();
+        if (userId is null) return Unauthorized();
+
+        var entity = await _db.Applications.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         if (entity is null) return NotFound();
+
         _db.Applications.Remove(entity);
         await _db.SaveChangesAsync();
         return NoContent();
