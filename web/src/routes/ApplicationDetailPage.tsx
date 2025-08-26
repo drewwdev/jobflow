@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
 import { useState } from "react";
+import ActivityList from "../components/ActivityList";
+import ActivityForm from "../components/ActivityForm";
 
 type AppStatus = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -335,6 +337,14 @@ export default function ApplicationDetailPage() {
           </form>
         )
       )}
+
+      <hr style={{ margin: "16px 0" }} />
+      <h2 style={{ marginBottom: 8 }}>Activity</h2>
+
+      <div style={{ display: "grid", gap: 12 }}>
+        <ActivityForm appId={a.id} />
+        <ActivityList appId={a.id} />
+      </div>
     </div>
   );
 }
