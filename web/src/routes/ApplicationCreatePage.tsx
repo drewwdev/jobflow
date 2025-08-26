@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../lib/api";
 
-type AppStatus = 0 | 1 | 2 | 3 | 4 | 5;
-
 export default function ApplicationCreatePage() {
   const nav = useNavigate();
 

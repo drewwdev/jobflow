@@ -2,32 +2,8 @@ import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api, toQuery } from "../lib/api";
 import { Link } from "react-router-dom";
-
-type AppStatus = 0 | 1 | 2 | 3 | 4 | 5;
-
-type Application = {
-  id: string;
-  title: string;
-  sourceUrl?: string | null;
-  location?: string | null;
-  status: AppStatus;
-  companyId?: string | null;
-  companyName?: string | null;
-  createdAt: string;
-  updatedAt: string;
-  appliedAt?: string | null;
-  interviewAt?: string | null;
-  offerAt?: string | null;
-};
-
-const STATUS_LABEL: Record<AppStatus, string> = {
-  0: "Saved",
-  1: "Applied",
-  2: "PhoneScreen",
-  3: "Interview",
-  4: "Offer",
-  5: "Rejected",
-};
+import type { Application, AppStatus } from "../types/application";
+import { STATUS_LABEL } from "../types/application";
 
 async function fetchApplications(params: {
   status?: AppStatus;

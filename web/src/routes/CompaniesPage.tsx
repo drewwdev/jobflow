@@ -1,13 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { api, toQuery } from "../lib/api";
 
-type Company = {
-  id: string;
-  name: string;
-  website?: string | null;
-  createdAt: string;
-};
-
 async function fetchCompanies(search?: string) {
   const qs = toQuery({ search, page: 1, pageSize: 20 });
   const { data } = await api.get<Company[]>(

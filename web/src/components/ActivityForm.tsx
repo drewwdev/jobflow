@@ -1,14 +1,8 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
-
-type CreatePayload = {
-  type: string;
-  body: string;
-  occurredAt?: string | null;
-};
-
-const TYPES = ["Note", "Call", "Interview", "Email", "Other"] as const;
+import { TYPES } from "../types/application";
+import type { CreatePayload } from "../types/application";
 
 export default function ActivityForm({ appId }: { appId: string }) {
   const qc = useQueryClient();
